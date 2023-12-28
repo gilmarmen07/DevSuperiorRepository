@@ -1,2 +1,0 @@
-# DevSuperiorRepository
-First Commit
