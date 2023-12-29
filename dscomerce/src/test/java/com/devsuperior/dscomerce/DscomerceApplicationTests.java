@@ -1,10 +1,10 @@
-package com.devsuperior.aula;
+package com.devsuperior.dscomerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AulaApplicationTests {
+class DscomerceApplicationTests {
 
 	@Test
 	void contextLoads() {
