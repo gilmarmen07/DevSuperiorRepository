@@ -1,4 +1,4 @@
-package com.devsuperior.dscomerce.entities;
+package com.devsuperior.dscommerce.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,36 +6,42 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "tb_payment")
-public class Payment {
+@Table(name = "tb_user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant moment;
+    @Column(unique = true)
+    private String email;
 
-    @OneToOne
-    @MapsId
-    private Order order;
+    private String phone;
+    private LocalDate birthDate;
+    private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Payment payment = (Payment) o;
+        User user = (User) o;
 
-        return Objects.equals(id, payment.id);
+        return Objects.equals(id, user.id);
     }
 
     @Override

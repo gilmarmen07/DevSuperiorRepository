@@ -1,6 +1,6 @@
-package com.devsuperior.dscomerce.entities;
+package com.devsuperior.dscommerce.entities;
 
-import com.devsuperior.dscomerce.enuns.OrderStatus;
+import com.devsuperior.dscommerce.enuns.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +39,7 @@ public class Order {
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items;
 
-    public List<Product> getProducts(){
+    public List<Product> getProducts() {
         return this.items.stream().map(OrderItem::getProduct).toList();
     }
 
