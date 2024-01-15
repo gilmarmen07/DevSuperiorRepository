@@ -26,10 +26,16 @@ public class ProductService {
                 () -> new ResourceNotFoundException("Register not found")));
     }
 
+//    @Transactional(readOnly = true)
+//    public Page<ProductDTO> findAll(Pageable pageable) {
+//        return productRepository.findAll(pageable).map(product -> productMapper.productToProductDTO(product));
+//    }
+
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable).map(product -> productMapper.productToProductDTO(product));
+    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+        return productRepository.searchByName(name, pageable).map(product -> productMapper.productToProductDTO(product));
     }
+
 
     @Transactional
     public ProductDTO insert(ProductDTO productDTO) {
