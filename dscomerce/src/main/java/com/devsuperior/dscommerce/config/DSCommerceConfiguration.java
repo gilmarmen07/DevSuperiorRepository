@@ -1,4 +1,4 @@
-package com.devsuperior.dscommerce.configuration;
+package com.devsuperior.dscommerce.config;
 
 import com.devsuperior.dscommerce.mapper.ProductMapper;
 import org.modelmapper.ModelMapper;
