@@ -1,5 +1,7 @@
-package com.devsuperior.dscommerce.dto;
+package com.devsuperior.dscommerce.dto.errors;
 
+import com.devsuperior.dscommerce.dto.FieldMessage;
+import com.devsuperior.dscommerce.dto.errors.CustomError;
 import lombok.Getter;
 
 import java.time.Instant;

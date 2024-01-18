@@ -1,8 +1,8 @@
 package com.devsuperior.dscommerce.controllers.handlers;
 
-import com.devsuperior.dscommerce.dto.CustomError;
+import com.devsuperior.dscommerce.dto.errors.CustomError;
 import com.devsuperior.dscommerce.dto.FieldMessage;
-import com.devsuperior.dscommerce.dto.ValidationError;
+import com.devsuperior.dscommerce.dto.errors.ValidationError;
 import com.devsuperior.dscommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
