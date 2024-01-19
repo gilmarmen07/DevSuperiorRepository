@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.services;
 
 import com.devsuperior.dscommerce.dto.ProductDTO;
+import com.devsuperior.dscommerce.dto.ProductMinDTO;
 import com.devsuperior.dscommerce.entities.Product;
 import com.devsuperior.dscommerce.mapper.ProductMapper;
 import com.devsuperior.dscommerce.repositories.ProductRepository;
@@ -26,14 +27,9 @@ public class ProductService {
                 () -> new ResourceNotFoundException("Register not found")));
     }
 
-//    @Transactional(readOnly = true)
-//    public Page<ProductDTO> findAll(Pageable pageable) {
-//        return productRepository.findAll(pageable).map(product -> productMapper.productToProductDTO(product));
-//    }
-
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(String name, Pageable pageable) {
-        return productRepository.searchByName(name, pageable).map(product -> productMapper.productToProductDTO(product));
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
+        return productRepository.searchByName(name, pageable).map(product -> productMapper.productToProductMinDTO(product));
     }
 
 

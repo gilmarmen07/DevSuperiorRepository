@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.mapper;
 
 import com.devsuperior.dscommerce.dto.ProductDTO;
+import com.devsuperior.dscommerce.dto.ProductMinDTO;
 import com.devsuperior.dscommerce.entities.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,10 @@ public class ProductMapper {
 
     public ProductDTO productToProductDTO(Product product) {
         return modelMapper.map(product, ProductDTO.class);
+    }
+
+    public ProductMinDTO productToProductMinDTO(Product product) {
+        return modelMapper.map(product, ProductMinDTO.class);
     }
 
     public Product productDTOToProduct(ProductDTO productDTO) {
