@@ -1,5 +1,6 @@
 package com.devsuperior.dscommerce.mapper;
 
+import com.devsuperior.dscommerce.dto.CategoryDTO;
 import com.devsuperior.dscommerce.dto.ProductDTO;
 import com.devsuperior.dscommerce.dto.ProductMinDTO;
 import com.devsuperior.dscommerce.entities.Product;
@@ -10,6 +11,9 @@ public class ProductMapper {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     public ProductDTO productToProductDTO(Product product) {
         return modelMapper.map(product, ProductDTO.class);
@@ -28,5 +32,9 @@ public class ProductMapper {
         product.setDescription(productDTO.getDescription());
         product.setImgUrl(productDTO.getImgUrl());
         product.setPrice(productDTO.getPrice());
+        product.getCategories().clear();
+        for (CategoryDTO dto : productDTO.getCategories()) {
+            product.getCategories().add(categoryMapper.categoryDTOToCategory(dto));
+        }
     }
 }

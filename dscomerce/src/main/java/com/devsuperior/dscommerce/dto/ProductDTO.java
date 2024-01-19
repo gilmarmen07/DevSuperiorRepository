@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,4 +18,6 @@ public class ProductDTO {
     private String description;
     private Double price;
     private String imgUrl;
+
+    private List<CategoryDTO> categories = new ArrayList<>();
 }
