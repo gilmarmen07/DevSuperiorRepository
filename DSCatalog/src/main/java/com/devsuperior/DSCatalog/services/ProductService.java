@@ -4,9 +4,11 @@ import com.devsuperior.DSCatalog.dto.ProductDTO;
 import com.devsuperior.DSCatalog.entities.Product;
 import com.devsuperior.DSCatalog.mapper.ProductMapper;
 import com.devsuperior.DSCatalog.repositories.ProductRepository;
+import com.devsuperior.DSCatalog.services.exceptions.DatabaseException;
 import com.devsuperior.DSCatalog.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,6 +54,10 @@ public class ProductService {
         if (!productRepository.existsById(id)) {
             throw new ResourceNotFoundException("Register not found");
         }
-        productRepository.deleteById(id);
+        try {
+            productRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation");
+        }
     }
 }
