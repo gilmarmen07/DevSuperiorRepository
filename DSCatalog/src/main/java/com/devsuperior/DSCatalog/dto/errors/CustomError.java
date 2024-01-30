@@ -1,4 +1,4 @@
-package com.devsuperior.dscommerce.dto.errors;
+package com.devsuperior.DSCatalog.dto.errors;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

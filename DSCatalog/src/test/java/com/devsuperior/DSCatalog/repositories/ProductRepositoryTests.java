@@ -33,7 +33,7 @@ public class ProductRepositoryTests {
     }
 
     @Test
-    public void findByIdReturnEmptyOptionalProductsWhenIdNotExists() {
+    public void findByIdReturnEmptyOptionalProductsWhenIdDoesNotExists() {
         Optional<Product> optional = productRepository.findById(nonExistingId);
         Assertions.assertTrue(optional.isEmpty());
     }
