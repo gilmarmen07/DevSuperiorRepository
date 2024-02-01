@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,36 +15,25 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_product")
-public class Product {
+@Table(name = "tb_role")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String authority;
 
-    private String name;
-
-    @Column(columnDefinition = "TEXT")
-    private String description;
-    private Double price;
-    private String imgUrl;
-
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant date;
-
-    @ManyToMany
-    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<>();
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Product product = (Product) o;
+        Role role = (Role) o;
 
-        return Objects.equals(id, product.id);
+        return Objects.equals(id, role.id);
     }
 
     @Override

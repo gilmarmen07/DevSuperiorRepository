@@ -21,6 +21,7 @@ public class ProductDTO {
 
     private Long id;
 
+    @Size(min = 5, max = 60, message = "The name must be 5 to 60 characters long")
     @NotBlank(message = "Required field")
     private String name;
 
@@ -32,6 +33,7 @@ public class ProductDTO {
     private Double price;
 
     private String imgUrl;
+    @PastOrPresent(message = "Product date cannot be in the future")
     private Instant date;
 
     @NotEmpty(message = "Must have at least one category")

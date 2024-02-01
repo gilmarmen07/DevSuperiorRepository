@@ -24,6 +24,7 @@ public class Category {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant createdAt;
 
+    @Setter(AccessLevel.PRIVATE)
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 

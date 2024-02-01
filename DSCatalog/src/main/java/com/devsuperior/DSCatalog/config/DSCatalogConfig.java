@@ -2,6 +2,8 @@ package com.devsuperior.DSCatalog.config;
 
 import com.devsuperior.DSCatalog.mapper.CategoryMapper;
 import com.devsuperior.DSCatalog.mapper.ProductMapper;
+import com.devsuperior.DSCatalog.mapper.RoleMapper;
+import com.devsuperior.DSCatalog.mapper.UserMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,4 +24,15 @@ public class DSCatalogConfig {
     public ProductMapper productMapper() {
         return new ProductMapper();
     }
+
+    @Bean
+    public UserMapper userMapper() {
+        return new UserMapper();
+    }
+
+    @Bean
+    public RoleMapper roleMapper() {
+        return new RoleMapper();
+    }
+
 }
