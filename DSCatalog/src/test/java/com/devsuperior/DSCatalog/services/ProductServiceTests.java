@@ -1,6 +1,6 @@
 package com.devsuperior.DSCatalog.services;
 
-import com.devsuperior.DSCatalog.Factory;
+import com.devsuperior.DSCatalog.tests.Factory;
 import com.devsuperior.DSCatalog.dto.ProductDTO;
 import com.devsuperior.DSCatalog.entities.Product;
 import com.devsuperior.DSCatalog.mapper.ProductMapper;
