@@ -7,6 +7,7 @@ import com.devsuperior.DSCatalog.entities.Role;
 import com.devsuperior.DSCatalog.entities.User;
 import com.devsuperior.DSCatalog.mapper.UserMapper;
 import com.devsuperior.DSCatalog.projections.UserDetailsProjection;
+import com.devsuperior.DSCatalog.repositories.RoleRepository;
 import com.devsuperior.DSCatalog.repositories.UserRepository;
 import com.devsuperior.DSCatalog.services.exceptions.DatabaseException;
 import com.devsuperior.DSCatalog.services.exceptions.ResourceNotFoundException;
@@ -18,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +35,7 @@ public class UserService implements UserDetailsService {
     private UserMapper userMapper;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private AuthService authService;
 
     @Transactional(readOnly = true)
     public Page<UserDTO> findAllPageable(Pageable pageable) {
@@ -49,8 +49,9 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public UserDTO insert(UserInsertDTO userDTO) {
-        User user = userRepository.save(userMapper.userDTOToUser(userDTO));
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        User user = new User();
+        userMapper.copyUserInsertDTOToUser(userDTO, user);
+        userRepository.save(user);
         return userMapper.userToUserDTO(user);
     }
 
@@ -92,5 +93,10 @@ public class UserService implements UserDetailsService {
         }
 
         return user;
+    }
+
+    @Transactional(readOnly = true)
+    public UserDTO findByMe() {
+        return userMapper.userToUserDTO(authService.authenticated());
     }
 }

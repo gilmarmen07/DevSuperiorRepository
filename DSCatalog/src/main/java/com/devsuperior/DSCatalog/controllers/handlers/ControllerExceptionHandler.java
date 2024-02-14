@@ -4,6 +4,7 @@ import com.devsuperior.DSCatalog.dto.errors.CustomError;
 import com.devsuperior.DSCatalog.dto.errors.FieldMessage;
 import com.devsuperior.DSCatalog.dto.errors.ValidationError;
 import com.devsuperior.DSCatalog.services.exceptions.DatabaseException;
+import com.devsuperior.DSCatalog.services.exceptions.EmailException;
 import com.devsuperior.DSCatalog.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,13 @@ public class ControllerExceptionHandler {
         HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
         ValidationError err = new ValidationError(Instant.now(), status.value(), "Invalid data", request.getRequestURI());
         err.addAll(e.getBindingResult().getFieldErrors().stream().map(fieldError -> new FieldMessage(fieldError.getField(), fieldError.getDefaultMessage())).toList());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<CustomError> database(EmailException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }
